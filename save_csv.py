@@ -8,15 +8,19 @@ csvfile = open("data.csv", "w")
 def uplink_callback(msg, client):
   print("Received uplink from ", msg.dev_id)
   print(msg)
+  i = 0
+  i = i + 1
   vbat = msg.payload_fields.Vbat
+
   cap0 = msg.payload_fields.cap0
   cap1 = msg.payload_fields.cap1
   moi0 = msg.payload_fields.moi0
   moi1 = msg.payload_fields.moi1
   temp0 = msg.payload_fields.temp0
   temp1 = msg.payload_fields.temp1
-  rssi = msg.gateways[0].rssi
-  snr = msg.gateways[0].snr
+  rssi = msg.metadata.gateways[0].rssi
+  snr = msg.metadata.gateways[0].snr
+  print('CSV:{},{},{},{},{},{},{},{},{},{}'.format(msg.counter, vbat, cap0, cap1, moi0, moi1, temp0, temp1, rssi, snr))
   csvfile.write('{},{},{},{},{},{},{},{},{},{}\n'.format(msg.counter, vbat, cap0, cap1, moi0, moi1, temp0, temp1, rssi, snr))
 
 
