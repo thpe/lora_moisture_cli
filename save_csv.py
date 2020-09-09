@@ -20,8 +20,9 @@ def uplink_callback(msg, client):
   temp1 = msg.payload_fields.temp1
   rssi = msg.metadata.gateways[0].rssi
   snr = msg.metadata.gateways[0].snr
-  print('CSV:{},{},{},{},{},{},{},{},{},{}'.format(msg.counter, vbat, cap0, cap1, moi0, moi1, temp0, temp1, rssi, snr))
-  csvfile.write('{},{},{},{},{},{},{},{},{},{}\n'.format(msg.counter, vbat, cap0, cap1, moi0, moi1, temp0, temp1, rssi, snr))
+  channel = msg.metadata.gateways[0].channel
+  print('CSV:{},{},{},{},{},{},{},{},{},{},{}'.format(msg.counter, vbat, cap0, cap1, moi0, moi1, temp0, temp1, rssi, snr,channel))
+  csvfile.write('{},{},{},{},{},{},{},{},{},{},{}\n'.format(msg.counter, vbat, cap0, cap1, moi0, moi1, temp0, temp1, rssi, snr,channel))
 
 
 handler = ttn.HandlerClient(appconfig.app_id, appconfig.access_key)
